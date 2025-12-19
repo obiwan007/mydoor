@@ -5,7 +5,7 @@ dist
 tmp
 out-tsc
 .env
-
+**/certs/*
 # dependencies
 node_modules
 
