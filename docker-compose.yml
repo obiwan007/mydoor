@@ -6,8 +6,6 @@ services:
       dockerfile: apps/nestjs-mydoor/Dockerfile
     env_file:
       - apps/nestjs-mydoor/.env
-    ports:
-      - "3000:3000"
     restart: unless-stopped
 
   frontend:
