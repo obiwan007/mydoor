@@ -11,8 +11,27 @@ export class CodeService {
   private readonly logger = new Logger(CodeService.name);
   private cache: CodesFile | null = null;
 
+  private getCodesFromEnv(): string[] {
+    const raw = process.env.VALID_CODES;
+    if (!raw) return [];
+    const parts = raw
+      .split(',')
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+    if (parts.length > 0) {
+      this.logger.log(`Loaded valid codes from environment (count=${parts.length}).`);
+    }
+    return parts;
+  }
+
   private async loadCodes(): Promise<CodesFile> {
     if (this.cache) {
+      return this.cache;
+    }
+    // Prefer environment variable VALID_CODES if provided
+    const envCodes = this.getCodesFromEnv();
+    if (envCodes.length > 0) {
+      this.cache = { validCodes: envCodes };
       return this.cache;
     }
     // In the bundled build, __dirname points to dist/apps/nestjs-mydoor
@@ -44,6 +63,7 @@ export class CodeService {
 
   async validateCode(code: string): Promise<boolean> {
     const codes = await this.loadCodes();
+    this.logger.log(`Validating code: ${code}`);
     return codes.validCodes.includes(code);
   }
 }

@@ -17,8 +17,8 @@ FROM nginx:alpine AS runtime
 # Nginx config for SPA and API proxy
 COPY apps/angular-mydoor/docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built static files
-COPY --from=build /workspace/dist/apps/angular-mydoor /usr/share/nginx/html
+# Copy built static files (Angular outputs to the browser/ subfolder)
+COPY --from=build /workspace/dist/apps/angular-mydoor/browser/ /usr/share/nginx/html/
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
