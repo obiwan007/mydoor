@@ -54,7 +54,8 @@
           "buildTarget": "angular-mydoor:build:production"
         },
         "development": {
-          "buildTarget": "angular-mydoor:build:development"
+          "buildTarget": "angular-mydoor:build:development",
+          "proxyConfig": "apps/angular-mydoor/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
