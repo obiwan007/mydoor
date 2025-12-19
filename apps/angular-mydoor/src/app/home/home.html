@@ -1,0 +1,36 @@
+<mat-card class="keypad-card">
+	<mat-card-header>
+		<mat-card-title>Enter Code</mat-card-title>
+	</mat-card-header>
+
+	<mat-card-content>
+		<mat-form-field appearance="outline" class="display-field">
+			<mat-label>Code</mat-label>
+			<input matInput [value]="code" readonly />
+		</mat-form-field>
+
+		<div class="keypad">
+			@for (d of digits; track d) {
+				<button
+					mat-raised-button
+					class="digit"
+					(click)="appendDigit(d)"
+				>
+					{{ d }}
+				</button>
+			}
+		</div>
+	</mat-card-content>
+
+	<mat-card-actions>
+		@if (code.length > 0) {
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="open()"
+			>
+				Open
+			</button>
+		}
+	</mat-card-actions>
+</mat-card>

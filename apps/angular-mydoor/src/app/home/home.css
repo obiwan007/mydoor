@@ -1,0 +1,19 @@
+.keypad-card {
+	max-width: 360px;
+	margin: 24px auto;
+}
+
+.display-field {
+	width: 100%;
+	margin-bottom: 16px;
+}
+
+.keypad {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
+}
+
+.digit {
+	height: 48px;
+}
